@@ -1,10 +1,15 @@
+#First Machine Learning Model
+#KNN  
+#Determines the class of a car depending on it's buying power, maintenance and safety
+#Data file is provided in repository
+
 import numpy as np
 import pandas as pd
 from sklearn import neighbors, metrics
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
-
+#Import and read data. In csv format
 data = pd.read_csv('car.data')
 
 #if there are any whitespaces in your data must include them as ' maintenance'
@@ -17,7 +22,7 @@ le = LabelEncoder()
 for i in range(len(x[0])):
     x[:, i] = le.fit_transform(x[:, i])
 
-#converting y
+#converting y, assigning a value
 label_mapping = {
     'unacc':0,
     'acc':1,
@@ -30,7 +35,8 @@ y = np.array(y)
 
 
 #create model
-
+#Split the data into two parts, training and testing data
+#Uses 80%-20% rule
 knn = neighbors.KNeighborsClassifier(n_neighbors=25, weights= 'uniform')
 
 #trains object, need x and y (features and labels)
